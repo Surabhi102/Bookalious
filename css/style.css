@@ -4,3 +4,8 @@ body {
 .em-text{
   color: #3498eb !important;
 }
+.jumbotron{
+  background: url(../images/web-1012467_1920.jpg) no-repeat top center ;
+  height: 598px;
+  color:#fff;
+}
