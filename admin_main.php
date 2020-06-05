@@ -23,7 +23,7 @@
 
   <body>
 <!--/.navigation bar  -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -36,32 +36,19 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li class="active"><a href="#">Book</a></li>
+            <li><a href="#">User</a></li>
 <!--/.drop down  -->
-<li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Science fiction</a></li>
-              <li><a href="#">text book</a></li>
-              <li><a href="#">fiction</a></li>
-            </ul>
-          </li>
 
-            <li><a href="#">Contact</a></li>
+
+            <li><a href="#">Transaction</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Author</a></li>
+            <li><a href="#">Publisher</a></li>
             </ul>
-<!--/.search  -->
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-              <button type="submit" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </form>
-            <!--/.nav to right  -->
+
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="glyphicon glyphicon-shopping-cart" href="#"></a></li>
+            
               <li><a class="glyphicon glyphicon-user" href="#"></a></li>
   
             </ul>
@@ -70,9 +57,9 @@
       </div>
     </nav>
 <!--/Jumbotron -->
-    <div class="jumbotron index">
+    <div class="jumbotron">
       <div class="container">
-      <h1>Buy and <span style="color:blue">  Sell</span>  your books here!!!</h1>
+      <h1>Welcome Admin!!!</h1>
       
     </div>
   </div>

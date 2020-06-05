@@ -5,7 +5,20 @@ body {
   color: #3498eb !important;
 }
 .jumbotron{
-  background: url(../images/web-1012467_1920.jpg) no-repeat top center ;
+ color:#000;
+
+
+}
+
+.form{
+  border-style: solid;
+  border-color: black;
+padding-left: 25px;
+padding-top: 25px;
+padding-bottom: 25px;
+}
+.index{
+  background: url(../images/web-1012467_1920.jpg) no-repeat top center !important ;
   height: 598px;
   color:#fff;
 }
