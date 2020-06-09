@@ -49,7 +49,7 @@
 
             <ul class="nav navbar-nav navbar-right">
             
-              <li><a class="glyphicon glyphicon-user" href="#"></a></li>
+              <li><a class="glyphicon glyphicon-log-out" href="admin_logout.php"> Logout</a></li>
   
             </ul>
         
