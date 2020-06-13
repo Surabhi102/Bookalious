@@ -18,7 +18,8 @@ $email = $_POST["email"];
         if(mysqli_num_rows($result)>0){ //
             $emai_err = "Email already exist";
         }
-        else{ // if does not exit 
+        else{ 
+            // if does not exit 
             if(strlen(trim($_POST["password"]))<6){ //checking wheatrher password is 
                 $password_err = "Password must have atleast 6 charecters.";
             }
@@ -47,6 +48,7 @@ $email = $_POST["email"];
             // Attempt to execute the prepared statement
                     if(mysqli_stmt_execute($stmt)){
                     // Redirect to login page
+                     echo '<script>alert("Resistered successfully!!")</script>'; 
                         header("location: index.html");
                     }
                     else{
@@ -93,5 +95,10 @@ $email = $_POST["email"];
     <br><br>
     <input type="submit" value="Sumit">
     </form>
+
+    <script>
+
+
+
 </body>
 </html>
