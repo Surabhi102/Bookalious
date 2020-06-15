@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div class="container">
 <div class="wrapper">
      <?php echo $err; ?> 
-     <?php echo $msg; ?>
+    
     <form  method="post" enctype="multipart/form-data">
     <div class="form-group">
     <label for="">Name</label>
@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div>
 </div>
 </div>
-
+<?php echo "<script type='text/javascript'>alert('$msg');</script>"; ?>
 </form>
 
 
