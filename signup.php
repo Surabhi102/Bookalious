@@ -49,7 +49,7 @@ $email = $_POST["email"];
                     if(mysqli_stmt_execute($stmt)){
                     // Redirect to login page
                      echo '<script>alert("Resistered successfully!!")</script>'; 
-                        header("location: index.html");
+                        header("location: user_login.php");
                     }
                     else{
                         echo "Something went wrong. Please try again later.";

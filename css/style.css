@@ -6,81 +6,67 @@ body {
 }
 .jumbotron{
  color:#000;
-
-
 }
 
 .form{
+  background-color: cornsilk;
   max-width: 330px;
-  border-style: solid;
-  border-color: black;
 widows: 30px;
-padding-top: 40px;
-padding-bottom: 40px;
-align-content: center;
-margin-left: 500px;
+padding: 30px;
+
 }
 .index{
   background: url(../images/web-1012467_1920.jpg) no-repeat top center !important ;
   height: 598px;
   color:#fff;
 }
-.panel-list a{
-	display:block;
-	color:#666;
-}
+.badge{
+	position: absolute;
+  top:05px;
+	padding: 3px 5px;
+	border-radius: 50%;
+	background: red;
+	color: white;
+  }
+  .image{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+    width: 150px;
+    height: 250px;
+ 
 
-.panel-list .panel-heading h3{
-	padding:4px;
-	font-size:18px;
-}
-
-.panel-heading-green{
-	background:#3b7e14 !important;
-	color:#fff !important;
-}
-
-.panel-heading-dark{
-	background:#333333 !important;
-	color:#fff !important;
-}
-
-.game{
-	display:relative;
-}
-
-.game-title{
-	text-align:center;
-	padding:5px;
-	background:#333;
-	color:#fff;
-}
-
-.game img{
-	width:100%;
-}
-
-.game-price{
-	position:absolute;
-	bottom:100px;
-	right:15px;
-	background:#3b7e14;
-	color:#fff;
-	padding:5px;
-	font-size:22px;
-}
-
-.game-add{
-	margin:5px auto 20px auto;
-	width:100%;
-	text-align:center;
-}
-
-.details-price{
-	font-size:25px;
-	margin-bottom:20px;
-}
-
-.details img{
-	width:100%;
-}
+  }
+  .name{
+    text-align: center;
+    font-family:'Times New Roman';
+    font-weight: bolder;
+    font-size: larger;
+    text-align:center;
+    padding:5px;
+    background:#333;
+    color:#fff;
+  }
+  .game{
+    border: 10px;
+  }
+  .price{
+    font-family:'Times New Roman';
+    font-weight: bolder;
+    font-size: larger;
+    text-align:center;
+    padding:5px;
+    background:#fff;
+    color:#333;
+  }
+  .game-add{
+    margin:5px auto 20px auto;
+    width:100%;
+    text-align:center;
+  }
+  footer{
+    text-align: center;
+    padding: 3px;
+    background-color: DarkSalmon;
+    color: white;
+  }

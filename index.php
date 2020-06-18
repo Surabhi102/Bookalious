@@ -1,11 +1,18 @@
+
 <?php
+
 include("connect.php");
 $sql = "SELECT `categoryname` FROM `category`";
 $result = mysqli_query($link,$sql);
 $num = mysqli_num_rows($result);
+$sql2 = "SELECT `categoryname` FROM `category`";
+$result2 = mysqli_query($link,$sql2);
+$num2 = mysqli_num_rows($result2);
 $sql1 = "SELECT `name`, `image`, `price` FROM `book`";
 $result1 = mysqli_query($link,$sql1);
 $num1 = mysqli_num_rows($result1);
+
+
 
 ?>
 <!doctype html>
@@ -51,15 +58,25 @@ $num1 = mysqli_num_rows($result1);
 <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Science fiction</a></li>
-              <li><a href="#">text book</a></li>
-              <li><a href="#">fiction</a></li>
+            <?php
+          if($num>0){
+            while($category= mysqli_fetch_array($result))
+            {
+            ?> 
+            <li class="list-group-item"><a href="#">
+              <?php echo $category['categoryname']; ?>
+            </a> 
+            </li>
+            <?php
+            }
+          }
+          ?>
             </ul>
           </li>
 
             <li><a href="#">Contact</a></li>
             </ul>
-<!--/.search  -->
+          <!--/.search  -->
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
@@ -70,9 +87,43 @@ $num1 = mysqli_num_rows($result1);
             </form>
             <!--/.nav to right  -->
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="glyphicon glyphicon-shopping-cart" href="#"></a></li>
-              <li><a class="glyphicon glyphicon-user" href="#"></a></li>
-  
+               <!--/. drop down with icon  -->
+              <li><a class="glyphicon glyphicon-shopping-cart" title="cart" href="cart.php">
+              <span class="badge abc">3</span></a></li><!--/.badge   -->
+
+              <!--/. drop down with icon  -->
+
+              <?php
+              session_start();
+                if(isset($_SESSION["loggedin"]))
+                {
+                  ?>
+                  <!-- Dropdown before logging in-->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Notification</a></li>
+                      <li><a href="#">Purchase History</a></li>
+                      <li><a href="#">Account</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Help</a></li>
+                      <li><a href="user_logout.php">Logout</a></li>
+                    </ul>
+              </li>
+
+                <?php }
+                 else { ?> <!-- Dropdown after logging in-->
+                  <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="signup.php">Signup</a></li>
+                      <li><a href="user_login.php">Login</a></li>
+                    </ul>
+              </li>
+                <?php } ?>
+
             </ul>
         
         </div><!--/.nav-collapse -->
@@ -84,7 +135,7 @@ $num1 = mysqli_num_rows($result1);
       <h1>Buy and <span style="color:blue">  Sell</span>  your books here!!!</h1>
     </div>
   </div>
-
+<!--/Display the books -->
 <div class="container">
   <div class="col-md-4">
     <div class="panel panel-default">
@@ -92,12 +143,12 @@ $num1 = mysqli_num_rows($result1);
     <div class="panel-body">
       <ul class="list-group">
         <?php
-          if($num>0){
-            while($category= mysqli_fetch_array($result))
+          if($num2>0){
+            while($category2= mysqli_fetch_array($result2))
             {
             ?> 
             <li class="list-group-item"><a href="#">
-              <?php echo $category['categoryname']; ?>
+              <?php echo $category2['categoryname']; ?>
             </a> 
             </li>
             <?php
@@ -116,23 +167,31 @@ $num1 = mysqli_num_rows($result1);
     </div>
     <div class="panel-body">
       <div class="row">
+        <!-- to display the books -->
         <?php
           if($num1>0){
             while($book = mysqli_fetch_array($result1))
             {
             ?> 
-            <div class="col-md-4 game">
+            <form action="insertcart.php" method="post">
+            <div class="col-md-6 game">
             <a href="#">
-              <img src="images/<?php echo $book['image']; ?>" />
+              <img class="image" src="images/<?php echo $book['image']; ?>" />
             </a>
-            <div class="game-title">
+            <div class="name">
             <?php echo $book['name']; ?>
+            <input type="hidden"  name="name"value="<?php echo $book['name']; ?>">
             </div>
-            <div><?php echo $book['price']; ?> </div>
+            <div >
+            <input class="form-control" type="number" name="quantity" value=1>
+            </div>
+            <div class="price">&#8377;<?php echo $book['price']; ?> </div>
+            <input type="hidden" name="price" value="<?php echo $book['price']; ?>">
             <div class="game-add">
-              <button class="btn btn-primary" type="submit">Add To Cart</button>
+              <button class="btn btn-primary" name="add" type="submit">Add To Cart</button>
             </div>
-            </div>
+            </div> 
+            </form>
           <?php
             }
           }
@@ -145,7 +204,15 @@ $num1 = mysqli_num_rows($result1);
   </div>
 </div>
    
+<footer class="footer">
+<div class="container">
 
+<p>Author: Hege Refsnes<br>
+  <a href="mailto:hege@example.com">hege@example.com</a></p>
+</div>
+
+
+</footer>
 
 
 
