@@ -48,8 +48,8 @@ $email = $_POST["email"];
             // Attempt to execute the prepared statement
                     if(mysqli_stmt_execute($stmt)){
                     // Redirect to login page
-                     echo '<script>alert("Resistered successfully!!")</script>'; 
-                        header("location: user_login.php");
+                    echo '<script>alert("registered successfully!!");</script>';
+                    echo '<script>window.location="user_login.php"</script>';
                     }
                     else{
                         echo "Something went wrong. Please try again later.";

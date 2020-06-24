@@ -8,13 +8,77 @@ $num = mysqli_num_rows($result);
 $sql2 = "SELECT `categoryname` FROM `category`";
 $result2 = mysqli_query($link,$sql2);
 $num2 = mysqli_num_rows($result2);
-$sql1 = "SELECT `name`, `image`, `price` FROM `book`";
+$sql1 = "SELECT `id`, `name`, `image`, `price` FROM `book`";
 $result1 = mysqli_query($link,$sql1);
 $num1 = mysqli_num_rows($result1);
+ 
+ session_start(); 
+ 
+
+ if(isset($_POST["add"]))  
+ {  
+  if(isset($_SESSION["loggedin"]))
+     {
+      if(isset($_SESSION["shopping_cart"]))  
+      {  
+           $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");  
+           if(!in_array($_GET["id"], $item_array_id))  
+           {  
+                $count = count($_SESSION["shopping_cart"]);  
+                $item_array = array(  
+                     'item_id' =>     $_GET["id"],  
+                     'item_name' =>     $_POST["name"],  
+                     'item_price' =>     $_POST["price"],  
+                     'item_quantity'=>     $_POST["quantity"]  
+                );  
+                $_SESSION["shopping_cart"][$count] = $item_array;  
+                echo '<script>alert("Item added")</script>';  
+                echo '<script>window.location="index.php"</script>'; 
+           }  
+           else  
+           {  
+                echo '<script>alert("Item Already Added")</script>';  
+                echo '<script>window.location="index.php"</script>';  
+           }  
+      }  
+      else  
+      {  
+           $item_array = array(  
+                'item_id' =>  $_GET["id"],  
+                'item_name' => $_POST["name"],  
+                'item_price' => $_POST["price"],  
+                'item_quantity' => $_POST["quantity"]  
+           );  
+           $_SESSION["shopping_cart"][0] = $item_array;  
+           echo '<script>alert("Item added")</script>';  
+           echo '<script>window.location="index.php"</script>'; 
+          
+      }  
+ }
+ else{
+  echo '<script>alert("please login")</script>';  
+  echo '<script>window.location="index.php"</script>';
+ }  
+}
+ if(isset($_GET["action"]))  
+ {  
+      if($_GET["action"] == "delete")  
+      {  
+           foreach($_SESSION["shopping_cart"] as $keys => $values)  
+           {  
+                if($values["item_id"] == $_GET["id"])  
+                {  
+                     unset($_SESSION["shopping_cart"][$keys]);  
+                     echo '<script>alert("Item Removed")</script>';  
+                     echo '<script>window.location="cart.php"</script>';  
+                }  
+           }  
+      }  
+ }  
+ ?>  
 
 
 
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -88,16 +152,18 @@ $num1 = mysqli_num_rows($result1);
             <!--/.nav to right  -->
             <ul class="nav navbar-nav navbar-right">
                <!--/. drop down with icon  -->
-              <li><a class="glyphicon glyphicon-shopping-cart" title="cart" href="cart.php">
-              <span class="badge abc">3</span></a></li><!--/.badge   -->
+         
 
               <!--/. drop down with icon  -->
 
               <?php
-              session_start();
+          
                 if(isset($_SESSION["loggedin"]))
                 {
+                  $num_items_in_cart = isset($_SESSION['shopping_cart']) ? count($_SESSION['shopping_cart']) : 0;
                   ?>
+                       <li><a class="glyphicon glyphicon-shopping-cart" title="cart" href="cart.php">
+              <span class="badge abc"><?php echo"$num_items_in_cart"?></span></a></li><!--/.badge   -->
                   <!-- Dropdown before logging in-->
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -113,7 +179,10 @@ $num1 = mysqli_num_rows($result1);
               </li>
 
                 <?php }
-                 else { ?> <!-- Dropdown after logging in-->
+                 else { ?> 
+                 <li><a class="glyphicon glyphicon-shopping-cart" title="cart" href="">
+              <span class="badge abc"></span></a></li><!--/.badge   -->
+                 <!-- Dropdown after logging in-->
                   <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
@@ -173,7 +242,7 @@ $num1 = mysqli_num_rows($result1);
             while($book = mysqli_fetch_array($result1))
             {
             ?> 
-            <form action="insertcart.php" method="post">
+            <form action="index.php?action=add&id=<?php echo $book["id"]; ?>" method="post">
             <div class="col-md-6 game">
             <a href="#">
               <img class="image" src="images/<?php echo $book['image']; ?>" />
@@ -203,7 +272,7 @@ $num1 = mysqli_num_rows($result1);
 
   </div>
 </div>
-   
+<!--footer-->
 <footer class="footer">
 <div class="container">
 

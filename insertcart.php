@@ -8,6 +8,7 @@ $email =  $_SESSION["email"];
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]==true){
     $sql = "INSERT INTO `cart`(`bookname`, `quantity`, `price`, `email`)
     VALUES ('$name','$quantity','$price','$email')";
+    
      $result = mysqli_query($link,$sql);
      if($result==true){
          header("location:index.php");
@@ -15,6 +16,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]==true){
 }
 else{
     echo '<script>alert("please log in");</script>';
+    echo '<script>window.location="index.php"</script>';
     
 }
 
